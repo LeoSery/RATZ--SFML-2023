@@ -130,7 +130,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SnakeRATZ.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="SpriteManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
