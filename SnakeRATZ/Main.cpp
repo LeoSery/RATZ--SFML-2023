@@ -7,8 +7,9 @@ int main()
 {
 	// Charger les textures pour les images des cellules
 	sf::Texture blueContainerTexture, greenContainerTexture;
-	blueContainerTexture = SpriteManager::loadTexture("./Assets/Sprites/BlueContainer.png");
-	greenContainerTexture = SpriteManager::loadTexture("./Assets/Sprites/GreenContainer.png");
+
+	blueContainerTexture = SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png");
+	greenContainerTexture = SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png");
 
 	// Créer les sprites
 	sf::Sprite blueContainerSprite, greenContainerSprite;
@@ -19,10 +20,9 @@ int main()
 	int rows = 20, cols = 20, cellSize = 40;
 	Grid grid(rows, cols, cellSize);
 
-	// Créer la fenêtre SFML
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
-	// Boucle principale
+
 	while (window.isOpen())
 	{
 		// Gestion des événements
@@ -31,13 +31,15 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::Resized)
+			{
+				//// Redimensionne les images pour qu'elles fassent la même taille que les cellules
+				//SpriteManager::resizeSprite(blueContainerSprite, cellSize);
+				//SpriteManager::resizeSprite(greenContainerSprite, cellSize);
+			}
 		}
 
-		// Redimensionner les images pour qu'elles fassent la même taille que les cellules
-		SpriteManager::resizeSprite(blueContainerSprite, cellSize);
-		SpriteManager::resizeSprite(greenContainerSprite, cellSize);
-
-		// Dessiner la grille avec les images alternées
+		// Dessine la grille avec les images alternées
 		window.clear();
 		for (int row = 0; row < rows; row++)
 		{
@@ -45,15 +47,10 @@ int main()
 			{
 				bool isBlue = (row + col) % 2 == 0;
 				sf::Sprite& sprite = isBlue ? blueContainerSprite : greenContainerSprite;
-
-				if (grid.getCell(row, col))
-				{
-					sprite.setPosition(col * cellSize, row * cellSize);
-					window.draw(sprite);
-				}
+				sprite.setPosition(col * cellSize, row * cellSize);
+				window.draw(sprite);
 			}
 		}
-		grid.draw(window);
 		window.display();
 	}
 

@@ -6,13 +6,11 @@ Grid::Grid(int rows, int cols, int cellSize)
 	this->cols = cols;
 	this->cellSize = cellSize;
 
-	cells = new sf::RectangleShape * [rows];
+	cells = new sf::Sprite * [rows];
 	for (int i = 0; i < rows; i++) {
-		cells[i] = new sf::RectangleShape[cols];
+		cells[i] = new sf::Sprite[cols];
 		for (int j = 0; j < cols; j++) {
-			cells[i][j].setSize(sf::Vector2f(cellSize, cellSize));
-			cells[i][j].setOutlineThickness(1);
-			cells[i][j].setOutlineColor(sf::Color::Black);
+			cells[i][j].setTextureRect(sf::IntRect(0, 0, cellSize, cellSize));
 			cells[i][j].setPosition(j * cellSize, i * cellSize);
 		}
 	}
@@ -35,14 +33,9 @@ void Grid::draw(sf::RenderWindow& window)
 	}
 }
 
-void Grid::setCell(int row, int col, bool state)
+sf::Sprite Grid::getCell(int row, int col)
 {
-	cells[row][col].setFillColor(state ? sf::Color::Black : sf::Color::White);
-}
-
-bool Grid::getCell(int row, int col)
-{
-	return cells[row][col].getFillColor() == sf::Color::Black;
+	return cells[row][col];
 }
 
 int Grid::getRows()
