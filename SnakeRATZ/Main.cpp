@@ -31,12 +31,12 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::Resized)
-			{
-				//// Redimensionne les images pour qu'elles fassent la même taille que les cellules
-				//SpriteManager::resizeSprite(blueContainerSprite, cellSize);
-				//SpriteManager::resizeSprite(greenContainerSprite, cellSize);
-			}
+
+			//check ou on est
+				// move
+			// check eat
+				// si eat, > rat++
+			// si c'est un rat, c'est ciao
 		}
 
 		// Dessine la grille avec les images alternées
