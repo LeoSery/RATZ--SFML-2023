@@ -1,12 +1,15 @@
 #include "Snake.h";
 #include "MyVector.h";
 
-extern int rows, cols, cellSize;
 
 Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
+	this->cellSize = cellSize;
 	sHeight = 1;
 	snake.push_back(Ratz(8, 14, cellSize, textures[3]));
 	snake.push_back(Ratz(8, 15, cellSize, textures[3]));
+}
+Snake::Snake() {
+
 }
 void Snake::LookDirection(MyVector newDirection) {
 	direction = newDirection;

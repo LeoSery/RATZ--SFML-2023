@@ -1,14 +1,14 @@
 #include "Grid.h"
 
-Grid::Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures)
+Grid::Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures, Snake snake)
 {
 	this->rows = rows;
 	this->cols = cols;
 	this->cellSize = cellSize;
-
+	this->snake = snake;
 	cells = new sf::Sprite * [rows];
 	CheeseList.push_back(Cheese(rows, cols, cellSize, textures[2]));
-	Snake snake(cellSize, textures);
+	
 	for (int i = 0; i < rows; i++) {
 		cells[i] = new sf::Sprite[cols];
 		for (int j = 0; j < cols; j++) {
@@ -35,6 +35,9 @@ void Grid::draw(sf::RenderWindow& window)
 	}
 	for(Cheese cheese : CheeseList) {
 		window.draw(cheese.cell);
+	}
+	for (Ratz ratz : snake.snake) {
+		window.draw(ratz.cell);
 	}
 }
 

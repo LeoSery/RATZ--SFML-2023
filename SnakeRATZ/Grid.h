@@ -7,11 +7,13 @@
 class Grid
 {
 public:
-	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures);
+	
+	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures, Snake snake);
 	~Grid();
+	Snake snake;
 	void draw(sf::RenderWindow& window);
+
 	sf::Sprite getCell(int row, int col);
-	Snake snake(int cellSize, std::vector<sf::Texture>& textures);
 	int getRows();
 	int getCols();
 private:
