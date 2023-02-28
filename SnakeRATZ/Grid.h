@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Cheese.h"
+#include "Snake.h"
 #ifndef GRID_H
 #define GRID_H
 
@@ -10,6 +11,7 @@ public:
 	~Grid();
 	void draw(sf::RenderWindow& window);
 	sf::Sprite getCell(int row, int col);
+	Snake snake(int cellSize, std::vector<sf::Texture>& textures);
 	int getRows();
 	int getCols();
 private:
