@@ -2,7 +2,7 @@
 #include <vector>;
 #include "Ratz.h";
 #include "MyVector.h";
-#include "SFML/System/Vector2.hpp";
+#include <SFML/Graphics.hpp>
 
 class Snake
 {
@@ -14,5 +14,5 @@ public:
 	Snake();
 	void LookDirection(MyVector newDirection);
 	void Eat();
-	void Move(MyVector direction, float rate);
+	void Move(sf::Window window, MyVector direction, float rate);
 };

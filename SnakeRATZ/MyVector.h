@@ -1,8 +1,7 @@
 #pragma once
 class MyVector {
-private:
-	int x, y;
 public:
+	int x, y;
 	MyVector(int a, int b);
 	MyVector()=default;
 
