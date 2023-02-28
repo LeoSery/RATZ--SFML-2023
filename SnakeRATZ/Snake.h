@@ -6,9 +6,8 @@
 
 class Snake
 {
-private:
-	std::vector<Ratz> snake;
 public:
+	std::vector<Ratz> snake;
 	int sHeight;
 	MyVector direction;
 	Snake();
