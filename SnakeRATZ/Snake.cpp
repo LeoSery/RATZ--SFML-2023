@@ -3,6 +3,7 @@
 
 
 Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
+	direction = MyVector(1, 0);
 	this->cellSize = cellSize;
 	sHeight = 1;
 	snake.push_back(Ratz(8, 14, cellSize, textures[3]));
@@ -18,12 +19,16 @@ void Snake::Eat() {
 }
 
 void Snake::Move() {
-	Ratz head = snake[0];
+	Ratz& head = snake[0];
 	MyVector position(head.cell.getPosition());
-	head.cell.setPosition(position.x + direction.x * cellSize, position.y + direction.y * cellSize);
+	head.cell.move(direction.x * cellSize, direction.y * cellSize);
+	head.x += direction.x;
+	head.y += direction.y;
 	for (int i = snake.size() - 1; i > 0; i--) {
-		Ratz block = snake[i];
+		Ratz &block = snake[i];
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
 		block.cell.setPosition(nextPosition);
 	}
+	std::cout << direction.x << direction.y << std::endl;
+	std::cout << head.x << head.y << std::endl;
 };

@@ -34,22 +34,24 @@ int main()
 				window.close();
 			if (event.type == sf::Event::KeyPressed)
 			{
+				MyVector direction;
 				if (event.key.code == sf::Keyboard::Left && currentSnake.direction.x != 1)
 				{
-					currentSnake.direction = MyVector(-1, 0);
+					direction = MyVector(-1, 0);
 				}
 				else if (event.key.code == sf::Keyboard::Right && currentSnake.direction.x != -1)
 				{
-					currentSnake.direction = MyVector(1, 0);
+					direction = MyVector(1, 0);
 				}
 				else if (event.key.code == sf::Keyboard::Up && currentSnake.direction.y != 1)
 				{
-					currentSnake.direction = MyVector(0, -1);
+					direction = MyVector(0, -1);
 				}
 				else if (event.key.code == sf::Keyboard::Down && currentSnake.direction.y != -1)
 				{
-					currentSnake.direction = MyVector(0, 1);
+					direction = MyVector(0, 1);
 				}
+				currentSnake.LookDirection(direction);
 			}
 		}
 

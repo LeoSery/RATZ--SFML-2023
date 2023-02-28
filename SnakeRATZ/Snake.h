@@ -3,6 +3,7 @@
 #include "Ratz.h";
 #include "MyVector.h";
 #include <SFML/Graphics.hpp>
+#include <iostream>;
 
 class Snake
 {
