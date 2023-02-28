@@ -19,7 +19,7 @@ int main()
 	// Créer la grille
 	int rows = 20, cols = 20, cellSize = 40;
 	Snake currentSnake(cellSize, textures);
-	Grid grid(rows, cols, cellSize, textures, currentSnake);
+	Grid grid(rows, cols, cellSize, textures);
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
@@ -59,6 +59,7 @@ int main()
 		window.clear();
 		
 		grid.draw(window);
+		currentSnake.draw(window);
 		window.display();
 		currentSnake.Move();
 		sf::sleep(sf::milliseconds((150)));

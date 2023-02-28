@@ -15,6 +15,7 @@ public:
 	Snake(int cellSize, std::vector<sf::Texture>& textures);
 	Snake();
 	void LookDirection(MyVector newDirection);
+	void draw(sf::RenderWindow& window);
 	void Eat();
 	void Move();
 };

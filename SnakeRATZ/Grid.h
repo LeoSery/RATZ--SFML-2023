@@ -8,9 +8,8 @@ class Grid
 {
 public:
 	
-	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures, Snake snake);
+	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures);
 	~Grid();
-	Snake snake;
 	void draw(sf::RenderWindow& window);
 
 	sf::Sprite getCell(int row, int col);
