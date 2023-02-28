@@ -17,7 +17,7 @@ void Snake::LookDirection(MyVector newDirection) {
 void Snake::Eat() {
 }
 
-void Snake::Move(sf::Window window, MyVector direction, float rate) {
+void Snake::Move() {
 	Ratz head = snake[0];
 	MyVector position(head.cell.getPosition());
 	head.cell.setPosition(position.x + direction.x * cellSize, position.y + direction.y * cellSize);
