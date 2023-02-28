@@ -1,22 +1,23 @@
 #include <SFML/Graphics.hpp>
+#include "Cheese.h"
 #ifndef GRID_H
 #define GRID_H
 
 class Grid
 {
 public:
-	Grid(int rows, int cols, int cellSize);
+	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures);
 	~Grid();
 	void draw(sf::RenderWindow& window);
 	sf::Sprite getCell(int row, int col);
 	int getRows();
 	int getCols();
-
 private:
 	int rows;
 	int cols;
 	int cellSize;
 	sf::Sprite** cells;
+	std::vector<Cheese> CheeseList;
 };
 
 #endif

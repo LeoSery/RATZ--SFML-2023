@@ -6,19 +6,18 @@
 int main()
 {
 	// Charger les textures pour les images des cellules
-	sf::Texture blueContainerTexture, greenContainerTexture;
+	std::vector<sf::Texture> textures;
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
 
-	blueContainerTexture = SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png");
-	greenContainerTexture = SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png");
+
 
 	// Créer les sprites
-	sf::Sprite blueContainerSprite, greenContainerSprite;
-	blueContainerSprite.setTexture(blueContainerTexture);
-	greenContainerSprite.setTexture(greenContainerTexture);
 
 	// Créer la grille
 	int rows = 20, cols = 20, cellSize = 40;
-	Grid grid(rows, cols, cellSize);
+	Grid grid(rows, cols, cellSize, textures);
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
@@ -41,16 +40,8 @@ int main()
 
 		// Dessine la grille avec les images alternées
 		window.clear();
-		for (int row = 0; row < rows; row++)
-		{
-			for (int col = 0; col < cols; col++)
-			{
-				bool isBlue = (row + col) % 2 == 0;
-				sf::Sprite& sprite = isBlue ? blueContainerSprite : greenContainerSprite;
-				sprite.setPosition(col * cellSize, row * cellSize);
-				window.draw(sprite);
-			}
-		}
+		
+		grid.draw(window);
 		window.display();
 	}
 
