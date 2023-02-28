@@ -10,7 +10,7 @@ public:
 	std::vector<Ratz> snake;
 	int sHeight;
 	MyVector direction;
-	Snake();
+	Snake(int cellSize, std::vector<sf::Texture>& textures);
 	void LookDirection(MyVector newDirection);
 	void Eat();
 	void Move(sf::Window window, MyVector direction, float rate);
