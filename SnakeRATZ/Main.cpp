@@ -12,6 +12,7 @@ int main()
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_bagarreur_sprite.png"));
 
 	// Créer les sprites
 
