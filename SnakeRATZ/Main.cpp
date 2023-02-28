@@ -3,6 +3,8 @@
 #include "Grid.h"
 #include "SpriteManager.h"
 
+int rows = 20, cols = 20, cellSize = 40;
+
 int main()
 {
 	// Charger les textures pour les images des cellules
@@ -11,12 +13,8 @@ int main()
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
 
-
-
 	// Créer les sprites
 
-	// Créer la grille
-	int rows = 20, cols = 20, cellSize = 40;
 	Grid grid(rows, cols, cellSize, textures);
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
@@ -38,9 +36,11 @@ int main()
 			// si c'est un rat, c'est ciao
 		}
 
+
+
 		// Dessine la grille avec les images alternées
 		window.clear();
-		
+
 		grid.draw(window);
 		window.display();
 	}
