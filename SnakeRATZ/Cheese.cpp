@@ -7,7 +7,9 @@ Cheese::Cheese(int rows, int cols, int cellSize, sf::Texture& cheeseTexture) {
     x = distrx(gen);
     std::uniform_int_distribution<> distry(0, cols); // define the y range
     y = distry(gen);
-    cell.setTextureRect(sf::IntRect(0, 0, cellSize, cellSize));
+    cell.setTexture(cheeseTexture);
+    float scaleFactor = cellSize / std::max(cell.getGlobalBounds().width, cell.getGlobalBounds().height);
+    cell.setScale(scaleFactor, scaleFactor);
     cell.setPosition(y * cellSize, x * cellSize);
 
 }
