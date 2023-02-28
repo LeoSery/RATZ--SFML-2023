@@ -34,7 +34,7 @@ int main()
 				window.close();
 			if (event.type == sf::Event::KeyPressed)
 			{
-				MyVector direction;
+				MyVector direction{};
 				if (event.key.code == sf::Keyboard::Left && currentSnake.direction.x != 1)
 				{
 					direction = MyVector(-1, 0);

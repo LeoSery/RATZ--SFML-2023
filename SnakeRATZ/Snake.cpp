@@ -35,7 +35,11 @@ void Snake::Move() {
 	head.y += direction.y;
 	for (int i = snake.size() - 1; i > 0; i--) {
 		Ratz &block = snake[i];
+		
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
+		
 		block.cell.setPosition(nextPosition);
+		block.x = snake[i - 1].x;
+		block.y = snake[i - 1].y;
 	}
 };
