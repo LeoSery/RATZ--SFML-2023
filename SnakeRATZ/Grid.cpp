@@ -7,7 +7,7 @@ Grid::Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures)
 	this->cellSize = cellSize;
 	cells = new sf::Sprite * [rows];
 	CheeseList.push_back(Cheese(rows, cols, cellSize, textures[2]));
-	
+
 	for (int i = 0; i < rows; i++) {
 		cells[i] = new sf::Sprite[cols];
 		for (int j = 0; j < cols; j++) {
@@ -32,7 +32,7 @@ void Grid::draw(sf::RenderWindow& window)
 			window.draw(cells[i][j]);
 		}
 	}
-	for(Cheese& cheese : CheeseList) {
+	for (Cheese& cheese : CheeseList) {
 		window.draw(cheese.cell);
 	}
 }

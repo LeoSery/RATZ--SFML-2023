@@ -7,14 +7,13 @@
 class Grid
 {
 public:
-	
 	Grid(int rows, int cols, int cellSize, std::vector<sf::Texture>& textures);
 	~Grid();
 	void draw(sf::RenderWindow& window);
-
-	sf::Sprite getCell(int row, int col);
 	int getRows();
 	int getCols();
+	sf::Sprite getCell(int row, int col);
+
 private:
 	int rows;
 	int cols;
@@ -22,5 +21,4 @@ private:
 	sf::Sprite** cells;
 	std::vector<Cheese> CheeseList;
 };
-
 #endif
