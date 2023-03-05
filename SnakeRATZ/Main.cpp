@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Grid.h"
 #include "SpriteManager.h"
+#include "RequestManager.h"
 
 int main()
 {
@@ -12,10 +13,6 @@ int main()
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_bagarreur_sprite.png"));
 
-
-
-	// Créer les sprites
-
 	// Créer la grille
 	int rows = 20, cols = 20, cellSize = 40;
 	Snake currentSnake(cellSize, textures);
@@ -23,18 +20,50 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
+
+	// Créer le RequestManager
+	RequestManager reqManager;
+
+
+	//Variables du jeu
+	bool GameOver = true;
+	int Score = 69;
+
+	//Création du texte pour l'input des scores
+	sf::String playerInput;
+	sf::Text playerText;
+	sf::Font TextFont;
+	if (!TextFont.loadFromFile("Assets/Fonts/Plexiglass.ttf"))
+	{
+		std::cout << "error";
+	}
+	playerText.setPosition(6, 9);
+	playerText.setCharacterSize(24);
+	playerText.setFillColor(sf::Color::Red);
+	playerText.setString("Name: ");
+	playerText.setFont(TextFont);
+
+
+	//Enum pour les directions
 	enum directions { Left = 0, Right = 1, Up = 2, Down = 3 };
 
 	while (window.isOpen())
 	{
 		// Gestion des événements
 		sf::Event event;
+
+		
+		
+
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::KeyPressed)
 			{
+				if (GameOver) {
+					break;
+				}
 				MyVector direction{};
 				if (event.key.code == sf::Keyboard::Left && currentSnake.direction.x != 1)
 				{
@@ -53,13 +82,65 @@ int main()
 					currentSnake.LookDirection(Down);
 				}
 			}
+
+			
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (!GameOver) {
+					break;
+				}
+				if (event.text.unicode == 8)
+				{
+					playerInput = playerText.getString();
+					if (playerInput.getSize() <= 6) { break; }
+					playerInput.erase(playerInput.getSize()-1, 1);
+					playerText.setString(playerInput);
+					break;
+				}
+				if (event.text.unicode == 13)
+				{
+					std::string pseudo = (std::string)playerText.getString().toAnsiString();
+					pseudo.erase(0, 6);
+					std::transform(pseudo.begin(), pseudo.end(), pseudo.begin(), ::toupper);
+					std::cout << pseudo;
+					reqManager.NewScore(pseudo, Score);
+					break;
+				}
+
+				if (event.text.unicode < 128)
+				{
+					playerInput = playerText.getString();
+					playerInput += event.text.unicode;
+					playerText.setString(playerInput);
+
+					std::cout << event.text.unicode;
+				}
+				
+			}
+
+
 		}
 
 		// Dessine la grille avec les images alternées
 		window.clear();
 		
-		grid.draw(window);
-		currentSnake.draw(window);
+
+
+		
+		
+		if (!GameOver) {
+			grid.draw(window);
+			currentSnake.draw(window);
+		}
+
+		else
+		{
+			window.draw(playerText);
+		}
+
+
+		
+		
 		window.display();
 		currentSnake.Move();
 		sf::sleep(sf::milliseconds((150)));
