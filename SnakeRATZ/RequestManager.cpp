@@ -6,6 +6,14 @@ size_t RequestManager::WriteCallback(void* contents, size_t size, size_t nmemb, 
 }
 
 std::string RequestManager::Scorelist() {
+
+	struct PseudoScore {
+		std::string pseudo;
+		int score;
+	};
+	std::vector<PseudoScore> arr;
+
+
 	// Initialize libcurl
 	CURL* curl = curl_easy_init();
 
@@ -26,6 +34,32 @@ std::string RequestManager::Scorelist() {
 		}
 		// Clean up libcurl resources
 		curl_easy_cleanup(curl);
+
+		//Parse Results
+		Json::Value root;
+		Json::Reader reader;
+		bool parsingSuccessful = reader.parse(score_list_response, root);
+		if (parsingSuccessful) {
+			for (int i = 0; i < root.size(); i++) {
+
+				std::string pseudo = root[i]["pseudo"].asString();
+				int score = root[i]["score"].asInt();
+				PseudoScore ps = { pseudo, score };
+				arr.push_back(ps);
+			}
+		}
+		else {
+			std::cout << "Failed to parse JSON string" << std::endl;
+		}
+
+		score_list_response = "";
+
+		for (int i = 0; i < arr.size(); i++) {
+			score_list_response += "Pseudo: " + arr[i].pseudo + ", Score: " + std::to_string(arr[i].score) + "\n";
+		}
+
+
+
 		return score_list_response;
 	}
 	return "no curl";

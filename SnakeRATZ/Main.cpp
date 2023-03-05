@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include "Grid.h"
 #include "SpriteManager.h"
@@ -27,19 +28,20 @@ int main()
 
 	//Variables du jeu
 	bool GameOver = true;
-	int Score = 69;
+	bool scoreSubmitted = false;
+	int Score = 5;
 
 	//Création du texte pour l'input des scores
 	sf::String playerInput;
 	sf::Text playerText;
 	sf::Font TextFont;
-	if (!TextFont.loadFromFile("Assets/Fonts/Plexiglass.ttf"))
+	if (!TextFont.loadFromFile("Assets/Fonts/FORCED_SQUARE.ttf"))
 	{
 		std::cout << "error";
 	}
 	playerText.setPosition(6, 9);
 	playerText.setCharacterSize(24);
-	playerText.setFillColor(sf::Color::Red);
+	playerText.setFillColor(sf::Color::White);
 	playerText.setString("Name: ");
 	playerText.setFont(TextFont);
 
@@ -86,7 +88,7 @@ int main()
 			
 			if (event.type == sf::Event::TextEntered)
 			{
-				if (!GameOver) {
+				if (!GameOver or scoreSubmitted) {
 					break;
 				}
 				if (event.text.unicode == 8)
@@ -101,9 +103,11 @@ int main()
 				{
 					std::string pseudo = (std::string)playerText.getString().toAnsiString();
 					pseudo.erase(0, 6);
-					std::transform(pseudo.begin(), pseudo.end(), pseudo.begin(), ::toupper);
 					std::cout << pseudo;
 					reqManager.NewScore(pseudo, Score);
+
+					playerText.setString(reqManager.Scorelist());
+					scoreSubmitted = true;
 					break;
 				}
 
