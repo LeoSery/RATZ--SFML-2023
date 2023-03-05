@@ -23,6 +23,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
+	enum directions { Left = 0, Right = 1, Up = 2, Down = 3 };
 
 	while (window.isOpen())
 	{
@@ -37,21 +38,20 @@ int main()
 				MyVector direction{};
 				if (event.key.code == sf::Keyboard::Left && currentSnake.direction.x != 1)
 				{
-					direction = MyVector(-1, 0);
+					currentSnake.LookDirection(Left);
 				}
 				else if (event.key.code == sf::Keyboard::Right && currentSnake.direction.x != -1)
 				{
-					direction = MyVector(1, 0);
+					currentSnake.LookDirection(Right);
 				}
 				else if (event.key.code == sf::Keyboard::Up && currentSnake.direction.y != 1)
 				{
-					direction = MyVector(0, -1);
+					currentSnake.LookDirection(Up);
 				}
 				else if (event.key.code == sf::Keyboard::Down && currentSnake.direction.y != -1)
 				{
-					direction = MyVector(0, 1);
+					currentSnake.LookDirection(Down);
 				}
-				currentSnake.LookDirection(direction);
 			}
 		}
 
