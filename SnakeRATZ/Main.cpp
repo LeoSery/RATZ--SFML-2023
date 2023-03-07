@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "RequestManager.h"
 #include "SpriteManager.h"
 #include <iostream>
@@ -21,6 +22,15 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
+	// Musique
+	sf::Music music;
+	if (!music.openFromFile("Assets/Sprites/PASDPANIK.ogg"))
+		return -1;
+		
+	music.setVolume(25.f);
+	music.play();
+	music.setLoop(true);
+
 	// Créer le RequestManager
 	RequestManager reqManager;
 
@@ -42,6 +52,9 @@ int main()
 	playerText.setString("Enter your name: ");
 	playerText.setFont(TextFont);
 
+
+
+
 	//Enum pour les directions
 	enum directions { Left = 0, Right = 1, Up = 2, Down = 3 };
 
@@ -61,19 +74,19 @@ int main()
 					break;
 				}
 				MyVector direction{};
-				if (event.key.code == sf::Keyboard::Left && currentSnake.direction.x != 1)
+				if ((event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Q) && currentSnake.direction.x != 1)
 				{
 					currentSnake.LookDirection(Left);
 				}
-				else if (event.key.code == sf::Keyboard::Right && currentSnake.direction.x != -1)
+				else if ((event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) && currentSnake.direction.x != -1)
 				{
 					currentSnake.LookDirection(Right);
 				}
-				else if (event.key.code == sf::Keyboard::Up && currentSnake.direction.y != 1)
+				else if ((event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Z) && currentSnake.direction.y != 1)
 				{
 					currentSnake.LookDirection(Up);
 				}
-				else if (event.key.code == sf::Keyboard::Down && currentSnake.direction.y != -1)
+				else if ((event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S) && currentSnake.direction.y != -1)
 				{
 					currentSnake.LookDirection(Down);
 				}
