@@ -27,7 +27,7 @@ int main()
 
 
 	//Variables du jeu
-	bool GameOver = true;
+	bool GameOver = false;
 	bool scoreSubmitted = false;
 	int Score = 5;
 
@@ -146,7 +146,9 @@ int main()
 		
 		
 		window.display();
+		
 		currentSnake.Move();
+		currentSnake.Eat(grid.CheeseList);
 		sf::sleep(sf::milliseconds((150)));
 	}
 

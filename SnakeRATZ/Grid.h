@@ -13,12 +13,13 @@ public:
 	int getRows();
 	int getCols();
 	sf::Sprite getCell(int row, int col);
+	std::vector<Cheese> CheeseList;
 
 private:
 	int rows;
 	int cols;
 	int cellSize;
 	sf::Sprite** cells;
-	std::vector<Cheese> CheeseList;
+	
 };
 #endif

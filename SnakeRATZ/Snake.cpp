@@ -1,17 +1,18 @@
 #include "MyVector.h";
+#include "Cheese.h";
 #include "Snake.h";
 
+
 Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
-	direction = MyVector(0, 1);
+	this->textures = textures;
+	direction = MyVector(0, -1);
+
 	this->cellSize = cellSize;
 	sHeight = 1;
-	snake.push_back(Ratz(1, 0, cellSize, textures[3]));
-	snake.push_back(Ratz(0, 0, cellSize, textures[3]));
+	snake.push_back(Ratz(5, 4, cellSize, textures[3]));
+	snake.push_back(Ratz(5, 5, cellSize, textures[3]));
 }
 
-Snake::Snake() {
-
-}
 
 void Snake::LookDirection(int newDirection) {
 
@@ -35,7 +36,25 @@ void Snake::LookDirection(int newDirection) {
 	std::cout << direction.x << direction.y << std::endl;
 }
 
-void Snake::Eat() {
+void Snake::Eat(std::vector<Cheese>& cheeseList) {
+	std::cout << cheeseList[0].cell.getPosition().x << cheeseList[0].cell.getPosition().y << std::endl;
+	std::cout << snake[0].cell.getPosition().x << snake[0].cell.getPosition().y << std::endl;
+
+	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 20 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x) {
+		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 10 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y - 10) {
+			cheeseList[0].randomizePos();
+
+			int LastIndex = snake.size()-1;
+			snake.push_back(Ratz(snake[LastIndex].x, snake[LastIndex].y, cellSize, textures[3]));
+			snake[LastIndex + 1].ratzDirection = snake[LastIndex].nextratzDirection;
+		}
+	}
+
+	if (cheeseList[0].getX() == snake[0].x - 2  && cheeseList[0].getY() == snake[0].y) {
+		
+	}
+
+
 }
 
 void Snake::draw(sf::RenderWindow& window) {
@@ -46,15 +65,21 @@ void Snake::draw(sf::RenderWindow& window) {
 
 void Snake::Move() {
 	Ratz& head = snake[0];
+	head.nextratzDirection = head.ratzDirection;
+	head.ratzDirection = direction; // saving next direction for normal rotations
 	MyVector position(head.cell.getPosition());
 
 	for (int i = snake.size() - 1; i > 0; i--) {
 		Ratz& body = snake[i];
 		body.x = snake[i - 1].x;
 		body.y = snake[i - 1].y;
+		body.ratzDirection = body.nextratzDirection;
+		body.nextratzDirection = snake[i - 1].ratzDirection;
+		
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
 
 		body.cell.setPosition(nextPosition);
+		body.TurnRatz(body.ratzDirection);
 	}
 
 	head.cell.setPosition(position.x + direction.x * cellSize, position.y + direction.y * cellSize);

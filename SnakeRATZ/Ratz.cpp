@@ -17,16 +17,16 @@ void Ratz::TurnRatz(MyVector& direction)
 {
 	float angle = atan2(direction.y, direction.x) * 180.0f / M_PI;
 
-	if (angle > -45.0f && angle <= 45.0f) {
+	if (angle == -90) {
 		cell.setRotation(0.0f);
 	}
-	else if (angle > 45.0f && angle <= 135.0f) {
+	else if (angle == 0) {
 		cell.setRotation(90.0f);
 	}
-	else if (angle > 135.0f || angle <= -135.0f) {
+	else if (angle == 90) {
 		cell.setRotation(180.0f);
 	}
-	else if (angle > -135.0f && angle <= -45.0f) {
+	else if (angle == 180) {
 		cell.setRotation(-90.0f);
 	}
 }
