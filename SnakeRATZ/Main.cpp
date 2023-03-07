@@ -36,10 +36,10 @@ int main()
 	{
 		std::cout << "error";
 	}
-	playerText.setPosition(6, 9);
+	playerText.setPosition(200, 300);
 	playerText.setCharacterSize(24);
 	playerText.setFillColor(sf::Color::White);
-	playerText.setString("Name: ");
+	playerText.setString("Enter your name: ");
 	playerText.setFont(TextFont);
 
 	//Enum pour les directions
@@ -89,7 +89,7 @@ int main()
 				if (event.text.unicode == 8)
 				{
 					playerInput = playerText.getString();
-					if (playerInput.getSize() <= 6) { break; }
+					if (playerInput.getSize() <= 17) { break; }
 					playerInput.erase(playerInput.getSize() - 1, 1);
 					playerText.setString(playerInput);
 					break;
@@ -99,7 +99,6 @@ int main()
 				{
 					std::string pseudo = (std::string)playerText.getString().toAnsiString();
 					pseudo.erase(0, 6);
-					std::cout << pseudo;
 					reqManager.NewScore(pseudo, currentSnake.snake.size());
 
 					playerText.setString(reqManager.Scorelist());
@@ -112,8 +111,6 @@ int main()
 					playerInput = playerText.getString();
 					playerInput += event.text.unicode;
 					playerText.setString(playerInput);
-
-					std::cout << event.text.unicode;
 				}
 			}
 		}
