@@ -29,7 +29,6 @@ int main()
 	//Variables du jeu
 	bool GameOver = false;
 	bool scoreSubmitted = false;
-	int Score = 5;
 
 	//Création du texte pour l'input des scores
 	sf::String playerInput;
@@ -104,7 +103,7 @@ int main()
 					std::string pseudo = (std::string)playerText.getString().toAnsiString();
 					pseudo.erase(0, 6);
 					std::cout << pseudo;
-					reqManager.NewScore(pseudo, Score);
+					reqManager.NewScore(pseudo, currentSnake.snake.size());
 
 					playerText.setString(reqManager.Scorelist());
 					scoreSubmitted = true;
