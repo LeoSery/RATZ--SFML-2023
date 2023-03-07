@@ -11,9 +11,8 @@ int main()
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
-	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/CorpsRat.png"));
-	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/TeteRat.png"));
-	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/AngleRat.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_bagarreur_sprite.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_noir_sprite.png"));
 
 	// Créer la grille
 	int rows = 20, cols = 20, cellSize = 40;
@@ -133,7 +132,7 @@ int main()
 		currentSnake.Move();
 		currentSnake.CheckDeath(GameOver);
 		currentSnake.Eat(grid.CheeseList);
-		sf::sleep(sf::milliseconds((100)));
+		sf::sleep(sf::milliseconds((200)));
 	}
 	return 0;
 }

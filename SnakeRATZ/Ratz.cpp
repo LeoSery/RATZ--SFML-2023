@@ -16,12 +16,16 @@ Ratz::Ratz(int a, int b, int cellSize, sf::Texture& texture) {
 void Ratz::TurnRatz(MyVector& direction)
 {
 	 
-	if (x == (x+direction.x) && y != (y + direction.y) ) { // direction verticale
-		
-		cell.setRotation(0.0f);
-	}
-	else if (x != (x + direction.x) && y == (y + direction.y)) { // direction horizontale
-		
-		cell.setRotation(-90.0f);
-	}
+    if (x == (x + direction.x) && y != (y + direction.y) && direction.y > 0) { // direction haut
+        cell.setRotation(180.0f);
+    }
+    else if (x != (x + direction.x) && y == (y + direction.y) && direction.x < 0) { // direction gauche
+        cell.setRotation(-90.0f);
+    }
+    else if (x != (x + direction.x) && y == (y + direction.y) && direction.x > 0) { // direction droite
+        cell.setRotation(90.0f);
+    }
+    else if (x == (x + direction.x) && y != (y + direction.y) && direction.y < 0) { // direction bas
+        cell.setRotation(0.0f);
+    }
 }
