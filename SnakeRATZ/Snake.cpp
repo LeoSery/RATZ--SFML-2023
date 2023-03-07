@@ -2,7 +2,7 @@
 #include "Snake.h";
 
 Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
-	direction = MyVector(1, 0);
+	direction = MyVector(0, 1);
 	this->cellSize = cellSize;
 	sHeight = 1;
 	snake.push_back(Ratz(1, 0, cellSize, textures[3]));
@@ -58,6 +58,7 @@ void Snake::Move() {
 	}
 
 	head.cell.setPosition(position.x + direction.x * cellSize, position.y + direction.y * cellSize);
+	head.TurnRatz(direction);
 	head.x += direction.x;
 	head.y += direction.y;
 };
