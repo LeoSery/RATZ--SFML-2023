@@ -77,7 +77,7 @@ void Snake::Move() {
 		body.x = snake[i - 1].x;
 		body.y = snake[i - 1].y;
 		body.ratzDirection = body.nextratzDirection;
-		body.nextratzDirection = snake[i - 1].ratzDirection;
+		body.nextratzDirection = snake[i - 1].nextratzDirection;
 
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
 
