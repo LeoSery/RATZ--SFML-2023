@@ -40,8 +40,8 @@ void Snake::Eat(std::vector<Cheese>& cheeseList) {
 	std::cout << cheeseList[0].cell.getPosition().x << cheeseList[0].cell.getPosition().y << std::endl;
 	std::cout << snake[0].cell.getPosition().x << snake[0].cell.getPosition().y << std::endl;
 
-	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 20 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x) {
-		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 10 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y - 10) {
+	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 40 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x) {
+		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 20 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y-20) {
 			cheeseList[0].randomizePos();
 
 			int LastIndex = snake.size()-1;
@@ -79,7 +79,7 @@ void Snake::Move() {
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
 
 		body.cell.setPosition(nextPosition);
-		body.TurnRatz(body.ratzDirection);
+		body.TurnRatz(body.nextratzDirection);
 	}
 
 	head.cell.setPosition(position.x + direction.x * cellSize, position.y + direction.y * cellSize);
