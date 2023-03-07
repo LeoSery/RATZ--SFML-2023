@@ -111,7 +111,7 @@ int main()
 				if (event.text.unicode == 13)
 				{
 					std::string pseudo = (std::string)playerText.getString().toAnsiString();
-					pseudo.erase(0, 6);
+					pseudo.erase(0, 17);
 					reqManager.NewScore(pseudo, currentSnake.snake.size());
 
 					playerText.setString(reqManager.Scorelist());

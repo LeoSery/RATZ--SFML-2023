@@ -33,13 +33,11 @@ void Snake::LookDirection(int newDirection)
 	default:
 		break;
 	}
-	std::cout << direction.x << direction.y << std::endl;
 }
 
 void Snake::Eat(std::vector<Cheese>& cheeseList)
 {
-	std::cout << cheeseList[0].cell.getPosition().x << cheeseList[0].cell.getPosition().y << std::endl;
-	std::cout << snake[0].cell.getPosition().x << snake[0].cell.getPosition().y << std::endl;
+	
 
 	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 40 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x)
 	{
