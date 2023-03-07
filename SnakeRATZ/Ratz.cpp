@@ -15,18 +15,13 @@ Ratz::Ratz(int a, int b, int cellSize, sf::Texture& texture) {
 
 void Ratz::TurnRatz(MyVector& direction)
 {
-	float angle = atan2(direction.y, direction.x) * 180.0f / M_PI;
-
-	if (angle == -90) {
+	 
+	if (x == (x+direction.x) && y != (y + direction.y) ) { // direction verticale
+		
 		cell.setRotation(0.0f);
 	}
-	else if (angle == 0) {
-		cell.setRotation(90.0f);
-	}
-	else if (angle == 90) {
-		cell.setRotation(180.0f);
-	}
-	else if (angle == 180) {
+	else if (x != (x + direction.x) && y == (y + direction.y)) { // direction horizontale
+		
 		cell.setRotation(-90.0f);
 	}
 }

@@ -9,7 +9,7 @@ Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
 
 	this->cellSize = cellSize;
 	sHeight = 1;
-	snake.push_back(Ratz(5, 4, cellSize, textures[3]));
+	snake.push_back(Ratz(5, 4, cellSize, textures[4]));
 	snake.push_back(Ratz(5, 5, cellSize, textures[3]));
 }
 

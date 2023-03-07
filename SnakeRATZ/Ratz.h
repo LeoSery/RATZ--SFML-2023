@@ -9,4 +9,5 @@ public:
 	MyVector ratzDirection;
 	MyVector nextratzDirection;
 	int x, y;
+	bool turn;
 };
