@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+
+  db:
+
+    restart: always
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/data/db
+    networks:
+      - front-network
+
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: always
+
+    environment:
+      - PING_LISTEN_PORT=3000
+      - DB_USER=postgres
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_PASSWORD=password
+      - DB_PORT=5432
+    
+    ports:
+      - 3000:3000
+  
+    depends_on: 
+      - db
+    
+    networks:
+      - front-network
+  
+networks:
+  front-network:
+    driver: bridge
+
+volumes: 
+ data: {}
