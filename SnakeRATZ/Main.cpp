@@ -1,9 +1,8 @@
 #include <SFML/Graphics.hpp>
-
+#include "RequestManager.h"
+#include "SpriteManager.h"
 #include <iostream>
 #include "Grid.h"
-#include "SpriteManager.h"
-#include "RequestManager.h"
 
 int main()
 {
@@ -16,7 +15,6 @@ int main()
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/TeteRat.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/AngleRat.png"));
 
-
 	// Créer la grille
 	int rows = 20, cols = 20, cellSize = 40;
 	Snake currentSnake(cellSize, textures);
@@ -24,10 +22,8 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "RATZ Project");
 
-
 	// Créer le RequestManager
 	RequestManager reqManager;
-
 
 	//Variables du jeu
 	bool GameOver = false;
@@ -47,7 +43,6 @@ int main()
 	playerText.setString("Name: ");
 	playerText.setFont(TextFont);
 
-
 	//Enum pour les directions
 	enum directions { Left = 0, Right = 1, Up = 2, Down = 3 };
 
@@ -56,16 +51,14 @@ int main()
 		// Gestion des événements
 		sf::Event event;
 
-		
-		
-
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (GameOver) {
+				if (GameOver)
+				{
 					break;
 				}
 				MyVector direction{};
@@ -87,20 +80,22 @@ int main()
 				}
 			}
 
-			
 			if (event.type == sf::Event::TextEntered)
 			{
-				if (!GameOver or scoreSubmitted) {
+				if (!GameOver or scoreSubmitted)
+				{
 					break;
 				}
+
 				if (event.text.unicode == 8)
 				{
 					playerInput = playerText.getString();
 					if (playerInput.getSize() <= 6) { break; }
-					playerInput.erase(playerInput.getSize()-1, 1);
+					playerInput.erase(playerInput.getSize() - 1, 1);
 					playerText.setString(playerInput);
 					break;
 				}
+
 				if (event.text.unicode == 13)
 				{
 					std::string pseudo = (std::string)playerText.getString().toAnsiString();
@@ -121,38 +116,24 @@ int main()
 
 					std::cout << event.text.unicode;
 				}
-				
 			}
-
-
 		}
-
-		// Dessine la grille avec les images alternées
 		window.clear();
-		
 
-
-		
-		
-		if (!GameOver) {
+		if (!GameOver)
+		{
 			grid.draw(window);
 			currentSnake.draw(window);
 		}
-
 		else
 		{
 			window.draw(playerText);
 		}
-
-
-		
-		
 		window.display();
-		
 		currentSnake.Move();
+		currentSnake.CheckDeath(GameOver);
 		currentSnake.Eat(grid.CheeseList);
-		sf::sleep(sf::milliseconds((50)));
+		sf::sleep(sf::milliseconds((100)));
 	}
-
 	return 0;
 }

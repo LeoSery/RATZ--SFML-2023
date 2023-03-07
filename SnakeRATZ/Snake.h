@@ -13,6 +13,7 @@ public:
 	void LookDirection(int newDirection);
 	void draw(sf::RenderWindow& window);
 	void Move();
+	void CheckDeath(bool& gameOver);
 
 	void Eat(std::vector<Cheese>& cheeseList);
 	std::vector<Ratz> snake;

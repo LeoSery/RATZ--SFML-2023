@@ -2,8 +2,8 @@
 #include "Cheese.h";
 #include "Snake.h";
 
-
-Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
+Snake::Snake(int cellSize, std::vector<sf::Texture>& textures)
+{
 	this->textures = textures;
 	direction = MyVector(0, -1);
 
@@ -13,8 +13,8 @@ Snake::Snake(int cellSize, std::vector<sf::Texture>& textures) {
 	snake.push_back(Ratz(5, 5, cellSize, textures[3]));
 }
 
-
-void Snake::LookDirection(int newDirection) {
+void Snake::LookDirection(int newDirection)
+{
 
 	switch (newDirection)
 	{
@@ -36,28 +36,31 @@ void Snake::LookDirection(int newDirection) {
 	std::cout << direction.x << direction.y << std::endl;
 }
 
-void Snake::Eat(std::vector<Cheese>& cheeseList) {
+void Snake::Eat(std::vector<Cheese>& cheeseList)
+{
 	std::cout << cheeseList[0].cell.getPosition().x << cheeseList[0].cell.getPosition().y << std::endl;
 	std::cout << snake[0].cell.getPosition().x << snake[0].cell.getPosition().y << std::endl;
 
-	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 40 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x) {
-		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 20 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y-20) {
+	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 40 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x)
+	{
+		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 20 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y - 20)
+		{
 			cheeseList[0].randomizePos();
 
-			int LastIndex = snake.size()-1;
+			int LastIndex = snake.size() - 1;
 			snake.push_back(Ratz(snake[LastIndex].x, snake[LastIndex].y, cellSize, textures[3]));
 			snake[LastIndex + 1].ratzDirection = snake[LastIndex].nextratzDirection;
 		}
 	}
 
-	if (cheeseList[0].getX() == snake[0].x - 2  && cheeseList[0].getY() == snake[0].y) {
-		
+	if (cheeseList[0].getX() == snake[0].x - 2 && cheeseList[0].getY() == snake[0].y)
+	{
+
 	}
-
-
 }
 
-void Snake::draw(sf::RenderWindow& window) {
+void Snake::draw(sf::RenderWindow& window)
+{
 	for (Ratz& ratz : snake) {
 		window.draw(ratz.cell);
 	}
@@ -75,7 +78,7 @@ void Snake::Move() {
 		body.y = snake[i - 1].y;
 		body.ratzDirection = body.nextratzDirection;
 		body.nextratzDirection = snake[i - 1].ratzDirection;
-		
+
 		sf::Vector2f nextPosition = snake[i - 1].cell.getPosition();
 
 		body.cell.setPosition(nextPosition);
@@ -86,4 +89,19 @@ void Snake::Move() {
 	head.TurnRatz(direction);
 	head.x += direction.x;
 	head.y += direction.y;
+}
+
+void Snake::CheckDeath(bool& gameOver)
+{
+	Ratz& head = snake[0];
+	for (int i = 1; i < snake.size(); i++) {
+		if (head.x == snake[i].x && head.y == snake[i].y) {
+			gameOver = true;
+			break;
+		}
+	}
+
+	if (head.x < 0 || head.x > 20 || head.y < 0 || head.y > 20) {
+		gameOver = true;
+	}
 };
