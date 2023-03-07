@@ -9,7 +9,7 @@ int main()
 	// Charger les textures pour les images des cellules
 	std::vector<sf::Texture> textures;
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/BlueContainer.png"));
-	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/GreenContainer.png"));
+	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/background.jpg"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/cheese.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_bagarreur_sprite.png"));
 	textures.push_back(SpriteManager::loadTexture("Assets/Sprites/Rat_noir_sprite.png"));
@@ -129,10 +129,12 @@ int main()
 			window.draw(playerText);
 		}
 		window.display();
-		currentSnake.Move();
-		currentSnake.CheckDeath(GameOver);
-		currentSnake.Eat(grid.CheeseList);
-		sf::sleep(sf::milliseconds((200)));
+		if (!GameOver) {
+			currentSnake.Move();
+			currentSnake.CheckDeath(GameOver);
+			currentSnake.Eat(grid.CheeseList);
+		}
+		sf::sleep(sf::milliseconds(75));
 	}
 	return 0;
 }
