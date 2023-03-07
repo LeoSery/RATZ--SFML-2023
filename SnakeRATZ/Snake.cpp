@@ -43,7 +43,7 @@ void Snake::Eat(std::vector<Cheese>& cheeseList)
 
 	if (snake[0].cell.getPosition().x <= cheeseList[0].cell.getPosition().x + 40 && snake[0].cell.getPosition().x >= cheeseList[0].cell.getPosition().x)
 	{
-		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 20 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y - 20)
+		if (snake[0].cell.getPosition().y <= cheeseList[0].cell.getPosition().y + 40 && snake[0].cell.getPosition().y >= cheeseList[0].cell.getPosition().y - 20)
 		{
 			cheeseList[0].randomizePos();
 
